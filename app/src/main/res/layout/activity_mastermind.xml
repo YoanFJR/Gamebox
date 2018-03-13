@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context="fr.epita.gamebox.MastermindActivity">
+
+    <!-- Menu and solution part -->
+    <TextView
+        android:id="@+id/mm_t_title"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="Mastermind"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/mm_b_newgame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newgame"
+        app:layout_constraintTop_toBottomOf="@+id/mm_t_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/mm_t_solution"
+        app:layout_constraintBottom_toBottomOf="@+id/mm_img_s1"/>
+
+    <TextView
+        android:id="@+id/mm_t_solution"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:text="@string/solution"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/mm_t_title"
+        app:layout_constraintLeft_toRightOf="@+id/mm_b_newgame"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/mm_img_s1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toRightOf="@+id/mm_b_newgame"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_s2"
+        app:layout_constraintTop_toBottomOf="@+id/mm_t_solution"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_s2"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_s1"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_s3"
+        app:layout_constraintTop_toTopOf="@+id/mm_img_s1"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_s3"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_s2"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_s4"
+        app:layout_constraintTop_toTopOf="@+id/mm_img_s1"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_s4"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_s3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mm_img_s1"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <TextView
+        android:id="@+id/mm_t_hiddenSolution"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Solution"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@drawable/buttonbackground"
+        app:layout_constraintTop_toBottomOf="@+id/mm_t_title"
+        app:layout_constraintBottom_toTopOf="@id/mm_sep_solution"
+        app:layout_constraintLeft_toRightOf="@id/mm_b_newgame"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <View
+        android:id="@+id/mm_sep_solution"
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:background="#777777"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/mm_b_newgame"
+        />
+
+    <!-- Proposition part -->
+
+    <ScrollView
+        android:id="@+id/mm_sc_propositions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mm_sep_solution"
+        app:layout_constraintBottom_toTopOf="@+id/mm_sep_submit">
+
+        <LinearLayout
+            android:id="@+id/mm_ll_propositions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Submit part-->
+
+    <View
+        android:id="@+id/mm_sep_submit"
+        android:background="#777777"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/mm_t_instructions"
+        android:layout_height="5px"/>
+
+    <TextView
+        android:id="@+id/mm_t_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/mm_b_submit"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ImageView
+        android:id="@+id/mm_img_p1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/mm_b_submit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_p2"
+        app:layout_constraintTop_toTopOf="@+id/mm_b_submit"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_p2"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/mm_b_submit"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_p1"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_p3"
+        app:layout_constraintTop_toTopOf="@+id/mm_b_submit"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_p3"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/mm_b_submit"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_p2"
+        app:layout_constraintRight_toLeftOf="@+id/mm_img_p4"
+        app:layout_constraintTop_toTopOf="@+id/mm_b_submit"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <ImageView
+        android:id="@+id/mm_img_p4"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/mm_b_submit"
+        app:layout_constraintLeft_toRightOf="@+id/mm_img_p3"
+        app:layout_constraintRight_toLeftOf="@+id/mm_b_submit"
+        app:layout_constraintTop_toTopOf="@+id/mm_b_submit"
+        app:srcCompat="@drawable/whitecircle" />
+
+    <Button
+        android:id="@+id/mm_b_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/mm_img_p4"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/submit"/>
+
+</android.support.constraint.ConstraintLayout>
