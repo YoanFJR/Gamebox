@@ -13,18 +13,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         t_b_tictactoe.setOnClickListener {
-            val intent = Intent(this, tictactoeActivity::class.java)
-            intent.putExtra("ID_PLAYER", t_in_player.text)
+            val intent = Intent(this@MainActivity, tictactoeActivity::class.java)
+            intent.putExtra("ID_PLAYER", t_in_player.text.toString())
             startActivity(intent)
         }
         t_b_mastermind.setOnClickListener {
-            val intent = Intent(this, MastermindActivity::class.java)
-            intent.putExtra("ID_PLAYER", t_in_player.text)
+            val intent = Intent(this@MainActivity, MastermindActivity::class.java)
+            intent.putExtra("ID_PLAYER", t_in_player.text.toString())
             startActivity(intent)
         }
         t_b_scores.setOnClickListener {
-            val intent = Intent(this, ScoresActivity::class.java)
-            intent.putExtra("ID_PLAYER", t_in_player.text)
+            val intent = Intent(this@MainActivity, ScoresActivity::class.java)
+            intent.putExtra("ID_PLAYER", t_in_player.text.toString())
             startActivity(intent)
         }
     }

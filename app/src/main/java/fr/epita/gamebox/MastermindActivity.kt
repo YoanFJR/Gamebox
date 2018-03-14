@@ -1,5 +1,6 @@
 package fr.epita.gamebox
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_mastermind.*
 import java.util.*
 import android.widget.ScrollView
+import fr.epita.gamebox.R.id.*
 
 class MastermindActivity : AppCompatActivity() {
 
@@ -27,10 +29,12 @@ class MastermindActivity : AppCompatActivity() {
         }
         mm_b_submit.setOnClickListener {
             if (checktry() || tryNumber > 12) {
-                if (tryNumber > 12)
-                    Toast.makeText(this@MastermindActivity, "You lose !", Toast.LENGTH_SHORT).show()
+                if (tryNumber > 12) {
+                    mm_t_solution.setTextColor(Color.rgb (255, 0, 0))
+                    mm_t_solution.text = "You lose.."
+                }
                 else
-                    Toast.makeText(this@MastermindActivity, "YOU WIN !", Toast.LENGTH_SHORT).show()
+                    mm_t_solution.text = "YOU WIN !"
 
                 mm_b_submit.isClickable = false
                 mm_t_hiddenSolution.visibility = View.INVISIBLE

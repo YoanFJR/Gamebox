@@ -33,12 +33,12 @@
         android:id="@+id/mm_t_solution"
         android:layout_width="0dp"
         android:layout_height="25dp"
-        android:text="@string/solution"
         android:gravity="center_horizontal|center_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/mm_t_title"
+        android:text=""
+        android:textColor="#00722E"
         app:layout_constraintLeft_toRightOf="@+id/mm_b_newgame"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/mm_t_title" />
 
     <ImageView
         android:id="@+id/mm_img_s1"
