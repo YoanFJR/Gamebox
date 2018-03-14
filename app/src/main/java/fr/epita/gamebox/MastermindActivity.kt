@@ -57,6 +57,8 @@ class MastermindActivity : AppCompatActivity() {
             propostition[3] = (propostition[3] + 1) % 6
             mm_img_p4.setImageResource(listColors[propostition[3]].ressource)
         }
+
+        mm_ll_propositions.adapter = TryAdapter(this@MastermindActivity, mutableListOf<MastermindTry>())
     }
 
     private fun initGame() {
@@ -77,7 +79,6 @@ class MastermindActivity : AppCompatActivity() {
     }
 
     private fun checktry() : Boolean {
-
         var okcount = 0
         var apcount = 0
 
@@ -99,15 +100,18 @@ class MastermindActivity : AppCompatActivity() {
         }
 
         // Add a proposition
-        var t_try = fr.epita.gamebox.itemtry(this@MastermindActivity, tryNumber.toString() + ".",
-                listColors[propostition[0]].ressource,
-                listColors[propostition[1]].ressource,
-                listColors[propostition[2]].ressource,
-                listColors[propostition[3]].ressource,
-                okcount.toString(), apcount.toString())
+        var mtry = MastermindTry()
+        mtry.turnNumber = tryNumber
+        mtry.c1 = listColors[propostition[0]].ressource
+        mtry.c2 = listColors[propostition[1]].ressource
+        mtry.c3 = listColors[propostition[2]].ressource
+        mtry.c4 = listColors[propostition[3]].ressource
+        mtry.okCount = okcount
+        mtry.apCount = apcount
+
+        ((mm_ll_propositions.adapter) as TryAdapter).addTry(mtry)
+        mm_ll_propositions.post(Runnable { mm_ll_propositions.setSelection(mm_ll_propositions.getCount() - 1) })
         tryNumber++
-        mm_ll_propositions.addView(t_try)
-        mm_sc_propositions.post({ mm_sc_propositions.fullScroll(ScrollView.FOCUS_DOWN) })
 
         return okcount == 4
     }

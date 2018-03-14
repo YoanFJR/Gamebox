@@ -111,13 +111,4 @@ class tictactoeActivity : AppCompatActivity() {
             GuestBitboard = GuestBitboard or(bitboard)
 
     }
-    /*
-    private fun DebugPrint(bb : Int) {
-        for (i in 0..2)
-            for (j in 0..2) {
-                if (bb)
-            }
-    }*/
-
-
 }

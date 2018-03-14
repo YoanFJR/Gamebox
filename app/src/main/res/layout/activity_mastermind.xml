@@ -104,6 +104,16 @@
 
     <!-- Proposition part -->
 
+    <ListView
+        android:id="@+id/mm_ll_propositions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mm_sep_solution"
+        app:layout_constraintBottom_toTopOf="@+id/mm_sep_submit"/>
+
+    <!--
     <ScrollView
         android:id="@+id/mm_sc_propositions"
         android:layout_width="0dp"
@@ -121,6 +131,7 @@
 
         </LinearLayout>
     </ScrollView>
+    -->
 
     <!-- Submit part-->
 

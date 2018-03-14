@@ -12,4 +12,5 @@
     <string name="login">Login</string>
     <string name="mastermindTitle">Mastermind</string>
     <string name="scores">Scores</string>
+    <string name="scoresTitle">Scores</string>
 </resources>
