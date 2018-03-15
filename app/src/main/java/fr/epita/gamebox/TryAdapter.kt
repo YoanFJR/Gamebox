@@ -58,7 +58,7 @@ class TryAdapter (val context : Context, val data : MutableList<MastermindTry>) 
         return data.size
     }
 
-    public fun addTry(mastermindTry : MastermindTry) {
+    fun addTry(mastermindTry : MastermindTry) {
         data.add(mastermindTry)
         notifyDataSetChanged()
     }

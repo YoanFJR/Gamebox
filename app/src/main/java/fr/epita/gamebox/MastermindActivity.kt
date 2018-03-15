@@ -1,16 +1,13 @@
 package fr.epita.gamebox
 
 import android.graphics.Color
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.GsonBuilder
-import fr.epita.gamebox.R.id.*
 import kotlinx.android.synthetic.main.activity_mastermind.*
 import retrofit2.Call
 import retrofit2.Callback

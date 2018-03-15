@@ -2,7 +2,6 @@ package fr.epita.gamebox
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.Script
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -13,8 +12,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.android.synthetic.main.activity_scores.*
-import java.util.HashMap
-import java.util.function.Consumer
 
 class ScoresActivity : AppCompatActivity() {
 
@@ -30,19 +27,14 @@ class ScoresActivity : AppCompatActivity() {
         val data = arrayListOf<Score>()
         val baseURL = "https://androidlessonsapi.herokuapp.com/api/"
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
-        // Create a Retrofit client object targeting the provided URL
-        // and add a JSON converter (because we are expecting json responses)
         val retrofit = Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(jsonConverter)
                 .build()
-        // Use the client to create a service:
-        // an object implementing the interface to the WebService
         val service: IWebService = retrofit.create(IWebService::class.java)
 
         val callback = object : Callback<List<Score>> {
             override fun onFailure(call: Call<List<Score>>?, t: Throwable?) {
-                // Code here what happens if calling the WebService fails
                 val tverror = TextView(this@ScoresActivity)
                 tverror.text = "Error loading"
                 sc_sc_score.addView(tverror)
@@ -78,7 +70,6 @@ class ScoresActivity : AppCompatActivity() {
                                 }
                             }
                             sc_sc_score.adapter = ScoreAdapter(this@ScoresActivity, data)
-
                         }
                         sc_sc_loading.visibility = View.INVISIBLE
                     }

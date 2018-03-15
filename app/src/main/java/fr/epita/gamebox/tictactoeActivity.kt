@@ -2,7 +2,6 @@ package fr.epita.gamebox
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
