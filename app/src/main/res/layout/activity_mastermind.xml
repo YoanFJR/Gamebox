@@ -196,7 +196,7 @@
             android:id="@+id/mm_w_choice"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/buttonbackgnd"
             android:orientation="horizontal"
             android:visibility="visible"
             android:layout_marginBottom="50dp"
