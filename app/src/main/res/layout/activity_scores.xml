@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/sc_t_mainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.epita.gamebox.ScoresActivity">
+    tools:context="fr.epita.gamebox.ScoresActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
 
     <TextView
         android:id="@+id/sc_t_title"
@@ -22,7 +26,7 @@
         android:id="@+id/sc_t_playerlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:fontFamily="serif"
         android:text="Player : "
         android:textStyle="bold"
@@ -38,15 +42,41 @@
         app:layout_constraintLeft_toRightOf="@id/sc_t_playerlabel"
         app:layout_constraintTop_toTopOf="@id/sc_t_playerlabel" />
 
+    <!-- Search tools -->
+
+    <EditText
+        android:id="@+id/sc_s_input_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Search"
+        app:layout_constraintLeft_toLeftOf="@+id/sc_t_playerlabel"
+        app:layout_constraintRight_toLeftOf="@id/sc_b_filter"
+        app:layout_constraintTop_toBottomOf="@id/sc_t_playerlabel"
+        app:layout_constraintBottom_toTopOf="@id/sc_sc_score"
+        app:layout_constraintHorizontal_weight="3"/>
+
+    <Button
+        android:id="@+id/sc_b_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toTopOf="@+id/sc_s_input_filter"
+        app:layout_constraintBottom_toBottomOf="@+id/sc_s_input_filter"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/sc_s_input_filter"
+        app:layout_constraintHorizontal_weight="1"/>
+
     <!-- Score display -->
+
     <ListView
         android:id="@+id/sc_sc_score"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sc_t_playerlabel"
+        app:layout_constraintTop_toBottomOf="@id/sc_s_input_filter"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
