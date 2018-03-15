@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    tools:context="fr.epita.gamebox.MastermindActivity">
+    tools:context="fr.epita.gamebox.MastermindActivity"
+    tools:ignore="ExtraText">
 
     <!-- Menu and solution part -->
     <TextView
@@ -113,26 +114,6 @@
         app:layout_constraintTop_toBottomOf="@+id/mm_sep_solution"
         app:layout_constraintBottom_toTopOf="@+id/mm_sep_submit"/>
 
-    <!--
-    <ScrollView
-        android:id="@+id/mm_sc_propositions"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mm_sep_solution"
-        app:layout_constraintBottom_toTopOf="@+id/mm_sep_submit">
-
-        <LinearLayout
-            android:id="@+id/mm_ll_propositions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-        </LinearLayout>
-    </ScrollView>
-    -->
-
     <!-- Submit part-->
 
     <View
@@ -203,5 +184,75 @@
         app:layout_constraintLeft_toRightOf="@id/mm_img_p4"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/submit"/>
+
+    <!-- Popup : Color selection part -->
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mm_cl_backgrnd_selectcolor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+        <LinearLayout
+            android:id="@+id/mm_w_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:id="@+id/mm_img_sel_blue"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/bluecircle" />
+
+            <ImageView
+                android:id="@+id/mm_img_sel_green"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/greencircle" />
+
+            <ImageView
+                android:id="@+id/mm_img_sel_purple"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/purplecircle" />
+
+            <ImageView
+                android:id="@+id/mm_img_sel_red"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/redcircle" />
+
+            <ImageView
+                android:id="@+id/mm_img_sel_white"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/whitecircle" />
+
+            <ImageView
+                android:id="@+id/mm_img_sel_yellow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/yellowcircle" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

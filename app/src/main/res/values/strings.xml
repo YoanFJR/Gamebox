@@ -3,7 +3,7 @@
     <string name="newgame">New game</string>
     <string name="submit">Submit</string>
     <string name="reset">Reset</string>
-    <string name="instructions">Click on the color circles to change their color</string>
+    <string name="instructions">Click or long click on the color circles to change their color</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

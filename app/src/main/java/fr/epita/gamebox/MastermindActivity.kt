@@ -4,18 +4,19 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_mastermind.*
 import java.util.*
-import android.widget.ScrollView
-import fr.epita.gamebox.R.id.*
 
 class MastermindActivity : AppCompatActivity() {
 
     private val listColors = listOf(Colors.BLUE, Colors.GREEN, Colors.PURPLE,
             Colors.RED, Colors.WHITE, Colors.YELLOW)
+    private var circles = mutableListOf<ImageView>()
     private var solutions = mutableListOf<Colors>()
     private var propostition = mutableListOf<Int>()
+    private var position = 0
     private var tryNumber : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,61 @@ class MastermindActivity : AppCompatActivity() {
             mm_img_p4.setImageResource(listColors[propostition[3]].ressource)
         }
 
+        mm_img_p1.setOnLongClickListener {
+            mm_cl_backgrnd_selectcolor.visibility = View.VISIBLE
+            position = 0
+            true
+        }
+        mm_img_p2.setOnLongClickListener {
+            mm_cl_backgrnd_selectcolor.visibility = View.VISIBLE
+            position = 1
+            true
+        }
+        mm_img_p3.setOnLongClickListener {
+            mm_cl_backgrnd_selectcolor.visibility = View.VISIBLE
+            position = 2
+            true
+        }
+        mm_img_p4.setOnLongClickListener {
+            mm_cl_backgrnd_selectcolor.visibility = View.VISIBLE
+            position = 3
+            true
+        }
+
+        mm_cl_backgrnd_selectcolor.setOnClickListener {
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_blue.setOnClickListener {
+            propostition[position] = 0
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_green.setOnClickListener {
+            propostition[position] = 1
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_purple.setOnClickListener {
+            propostition[position] = 2
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_red.setOnClickListener {
+            propostition[position] = 3
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_white.setOnClickListener {
+            propostition[position] = 4
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+        mm_img_sel_yellow.setOnClickListener {
+            propostition[position] = 5
+            circles[position].setImageResource(listColors[propostition[position]].ressource)
+            mm_cl_backgrnd_selectcolor.visibility = View.INVISIBLE
+        }
+
         mm_ll_propositions.adapter = TryAdapter(this@MastermindActivity, mutableListOf<MastermindTry>())
     }
 
@@ -66,6 +122,7 @@ class MastermindActivity : AppCompatActivity() {
                 Colors.RED, Colors.WHITE, Colors.YELLOW)
         var r = Random()
 
+        circles.addAll(listOf(mm_img_p1, mm_img_p2, mm_img_p3, mm_img_p4))
         propostition.addAll(listOf(4, 4, 4, 4))
         solutions.add(colors.removeAt(r.nextInt(colors.size - 1)))
         solutions.add(colors.removeAt(r.nextInt(colors.size - 1)))
