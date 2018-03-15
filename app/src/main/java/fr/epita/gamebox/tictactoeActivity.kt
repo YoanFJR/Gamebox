@@ -5,7 +5,14 @@ import android.os.Bundle
 import android.os.Debug
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_tictactoe.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class tictactoeActivity : AppCompatActivity() {
 
@@ -73,11 +80,13 @@ class tictactoeActivity : AppCompatActivity() {
             if (PlayerBitBoard and(solutions[i]) == solutions[i]) {
                 ttt_t_playerturn.text = playerLogin + " wins !"
                 disableButtons()
+                SendScore("win")
                 return true
             }
             else if (GuestBitboard and(solutions[i]) == solutions[i]) {
                 ttt_t_playerturn.text = "Guest wins !"
                 disableButtons()
+                SendScore("loose")
                 return true
             }
         }
@@ -102,6 +111,7 @@ class tictactoeActivity : AppCompatActivity() {
 
         if (!checkWin() && markcount == 9) {
             ttt_t_playerturn.text = "Draw !"
+            SendScore("draw")
         }
     }
     private fun setBitboard(bitboard : Int) {
@@ -110,5 +120,38 @@ class tictactoeActivity : AppCompatActivity() {
         else
             GuestBitboard = GuestBitboard or(bitboard)
 
+    }
+    private fun SendScore(score : String) {
+        val baseURL = "https://androidlessonsapi.herokuapp.com/api/"
+        val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
+        val retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(jsonConverter)
+                .build()
+        val service: IWebService = retrofit.create(IWebService::class.java)
+        val callback = object : Callback<Boolean> {
+            override fun onFailure(call: Call<Boolean>?, t: Throwable?) {
+                Toast.makeText(this@tictactoeActivity, "Score post failed", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "WebService call failed")
+            }
+            override fun onResponse(call: Call<Boolean>?, response: Response<Boolean>?) {
+                // Code here what happens when WebService responds
+                if (response != null) {
+                    if (response.code() == 200) {
+                        // We got our data !
+                        val responseData = response.body()
+                        if (responseData != null && responseData) {
+                            Toast.makeText(this@tictactoeActivity, "Score successfully sent", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else
+                        Toast.makeText(this@tictactoeActivity, "Score post failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        var parameters = hashMapOf(Pair("game_id","1"),
+                Pair("score", score),
+                Pair("player", playerLogin))
+        service.postScore(parameters).enqueue(callback)
     }
 }

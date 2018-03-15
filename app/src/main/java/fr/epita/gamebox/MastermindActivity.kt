@@ -1,16 +1,26 @@
 package fr.epita.gamebox
 
 import android.graphics.Color
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_mastermind.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class MastermindActivity : AppCompatActivity() {
 
+    private var playerLogin : String = "N/A"
     private val listColors = listOf(Colors.BLUE, Colors.GREEN, Colors.PURPLE,
             Colors.RED, Colors.WHITE, Colors.YELLOW)
     private var circles = mutableListOf<ImageView>()
@@ -33,9 +43,12 @@ class MastermindActivity : AppCompatActivity() {
                 if (tryNumber > 12) {
                     mm_t_solution.setTextColor(Color.rgb (255, 0, 0))
                     mm_t_solution.text = "You lose.."
+                    SendScore("loose")
                 }
-                else
+                else {
                     mm_t_solution.text = "YOU WIN !"
+                    SendScore("win")
+                }
 
                 mm_b_submit.isClickable = false
                 mm_t_hiddenSolution.visibility = View.INVISIBLE
@@ -118,6 +131,7 @@ class MastermindActivity : AppCompatActivity() {
     }
 
     private fun initGame() {
+        playerLogin = intent.getStringExtra("ID_PLAYER")
         var colors = mutableListOf(Colors.BLUE, Colors.GREEN, Colors.PURPLE,
                 Colors.RED, Colors.WHITE, Colors.YELLOW)
         var r = Random()
@@ -171,5 +185,39 @@ class MastermindActivity : AppCompatActivity() {
         tryNumber++
 
         return okcount == 4
+    }
+
+    private fun SendScore(score : String) {
+        val baseURL = "https://androidlessonsapi.herokuapp.com/api/"
+        val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
+        val retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(jsonConverter)
+                .build()
+        val service: IWebService = retrofit.create(IWebService::class.java)
+        val callback = object : Callback<Boolean> {
+            override fun onFailure(call: Call<Boolean>?, t: Throwable?) {
+                Toast.makeText(this@MastermindActivity, "Score post failed", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "WebService call failed")
+            }
+            override fun onResponse(call: Call<Boolean>?, response: Response<Boolean>?) {
+                // Code here what happens when WebService responds
+                if (response != null) {
+                    if (response.code() == 200) {
+                        // We got our data !
+                        val responseData = response.body()
+                        if (responseData != null && responseData) {
+                            Toast.makeText(this@MastermindActivity, "Score successfully sent", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else
+                        Toast.makeText(this@MastermindActivity, "Score post failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        var parameters = hashMapOf(Pair("game_id","10"),
+                Pair("score", score),
+                Pair("player", playerLogin))
+        service.postScore(parameters).enqueue(callback)
     }
 }
