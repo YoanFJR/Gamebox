@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.GsonBuilder
+import fr.epita.gamebox.R.id.*
 import kotlinx.android.synthetic.main.activity_mastermind.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,17 +40,16 @@ class MastermindActivity : AppCompatActivity() {
             startActivity(intent)
         }
         mm_b_submit.setOnClickListener {
-            if (checktry() || tryNumber > 12) {
-                if (tryNumber > 12) {
-                    mm_t_solution.setTextColor(Color.rgb (255, 0, 0))
-                    mm_t_solution.text = "You lose.."
-                    SendScore("loose")
-                }
-                else {
-                    mm_t_solution.text = "YOU WIN !"
-                    SendScore("win")
-                }
-
+            if (checktry() && tryNumber <= 13) {
+                mm_t_solution.text = "YOU WIN !"
+                SendScore("win")
+                mm_b_submit.isClickable = false
+                mm_t_hiddenSolution.visibility = View.INVISIBLE
+            }
+            else if (tryNumber > 12){
+                mm_t_solution.setTextColor(Color.rgb (255, 0, 0))
+                mm_t_solution.text = "You lose.."
+                SendScore("loose")
                 mm_b_submit.isClickable = false
                 mm_t_hiddenSolution.visibility = View.INVISIBLE
             }
@@ -188,6 +188,8 @@ class MastermindActivity : AppCompatActivity() {
     }
 
     private fun SendScore(score : String) {
+        if (playerLogin == "nosend")
+            return
         val baseURL = "https://androidlessonsapi.herokuapp.com/api/"
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
         val retrofit = Retrofit.Builder()

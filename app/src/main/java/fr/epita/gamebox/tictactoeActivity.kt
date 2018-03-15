@@ -29,6 +29,11 @@ class tictactoeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tictactoe)
         initGame()
 
+        ttt_b_reset.setOnClickListener {
+            finish()
+            startActivity(intent)
+        }
+
         ttt_b_11.setOnClickListener {
             setBitboard(0x100)
             marks(ttt_b_11)
@@ -98,11 +103,11 @@ class tictactoeActivity : AppCompatActivity() {
     }
     private fun marks (button : Button) {
         if (Xturn) {
-            button.text = "X"
+            button.setBackgroundResource(R.drawable.xclipart)
             ttt_t_playerturn.text = "Guest's turn !"
         }
         else {
-            button.text = "O"
+            button.setBackgroundResource(R.drawable.oclipart)
             ttt_t_playerturn.text = playerLogin + "'s turn !"
         }
         button.isClickable = false
@@ -122,6 +127,8 @@ class tictactoeActivity : AppCompatActivity() {
 
     }
     private fun SendScore(score : String) {
+        if (playerLogin == "nosend")
+            return
         val baseURL = "https://androidlessonsapi.herokuapp.com/api/"
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
         val retrofit = Retrofit.Builder()
